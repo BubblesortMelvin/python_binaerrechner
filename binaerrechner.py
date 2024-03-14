@@ -22,24 +22,24 @@
 # FUNCTIONS #
 
 def decimal_to_binary(decimal):
-    if decimal == 0:
+    if decimal == 0:                # if decimal number = 0, binary number also 0
         return "0"
 
     binary = ""
-    while decimal > 0:
-        rest = decimal % 2
-        binary = str(rest) + binary
-        decimal = decimal // 2
-    return binary
+    while decimal > 0:              
+        rest = decimal % 2              # decimal number / 2 = new decimal number + rest(1 or 0) 
+        binary = str(rest) + binary     # rest gets safed to binary from bit 0 - x
+        decimal = decimal // 2          # new decimal number gets set as decimal number
+    return binary                       # binary number from the rest from every 
 
 def binary_to_decimal(binary):
-    decimal = 0
-    power = len(binary) - 1
-    for bit in binary:
-        if bit == '1':
+    decimal = 0                         # local variable decimal ist set
+    power = len(binary) - 1             # the power (of two) is set to be the length of the binary code minus one 
+    for bit in binary:                  # every bit in the binary number is looked through and 
+        if bit == '1':                  # if its '1' the two to the set power for the bit gets added to the decimal number
             decimal += 2 ** power
         power -= 1
-    return decimal
+    return decimal                      #after power < 0 the decimal number is returned 
  
 
 
