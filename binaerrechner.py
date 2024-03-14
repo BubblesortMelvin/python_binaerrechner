@@ -19,6 +19,30 @@
 ####        of two binary numbers                        ####
 #############################################################
 
+# FUNCTIONS #
+
+def decimal_to_binary(decimal):
+    if decimal == 0:
+        return "0"
+
+    binary = ""
+    while decimal > 0:
+        rest = decimal % 2
+        binary = str(rest) + binary
+        decimal = decimal // 2
+    return binary
+
+def binary_to_decimal(binary):
+    decimal = 0
+    power = len(binary) - 1
+    for bit in binary:
+        if bit == '1':
+            decimal += 2 ** power
+        power -= 1
+    return decimal
+ 
+
+
 while True:
     # main menu setup #
     print("1. Convert decimal number to binary number")
@@ -43,14 +67,16 @@ while True:
 
     elif choice == '1':
         decimal = int(input("Please input a decimal number: "))
+        print(f"The binary number to {decimal} is: ", decimal_to_binary(decimal))
 
     elif choice == '2':
         binary = input("Please input a binary number: ")
+        print(f"The kdecimal number to {binary} is: ", binary_to_decimal(binary))
 
     # user input for option 3 to 6 #
     else:
-        binary1 = input("Geben Sie die erste Binärzahl ein: ")      # choice 3-6 need two binary numbers
-        binary2 = input("Geben Sie die zweite Binärzahl ein: ")     # to not repeat asking for numbers they are asked after     
+        binary1 = input("Please input first binary number: ")      # choice 3-6 need two binary numbers
+        binary2 = input("Please input secon binary number: ")     # to not repeat asking for numbers they are asked after     
                                                                     # choice 1, 2, 7
     # addition of binary1 and binary2 #
     if choice == '3':
