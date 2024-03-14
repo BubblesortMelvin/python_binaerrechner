@@ -41,7 +41,17 @@ def binary_to_decimal(binary):
         power -= 1
     return decimal                      #after power < 0 the decimal number is returned 
  
+def bin_add(binary1, binary2):
+    return bin(int(binary1, 2) + int(binary2, 2))[2:]
 
+def bin_sub(binary1, binary2):
+    return bin(int(binary1, 2) - int(binary2, 2))[2:]
+
+def bin_multi(binary1, binary2):
+    return bin(int(binary1, 2) * int(binary2, 2))[2:]
+
+def bin_div(binary1, binary2):
+    return bin(int(binary1, 2) // int(binary2, 2))[2:]
 
 while True:
     # main menu setup #
@@ -80,19 +90,25 @@ while True:
                                                                     # choice 1, 2, 7
     # addition of binary1 and binary2 #
     if choice == '3':
-        print(f"The result of the addition of {binary1} and {binary2} is:")
+        print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))
     
     #subtraction of binary1 and binary2 #
     elif choice == '4':
-        print(f"The result of the subtraction of {binary1} and {binary2} is:")
+        print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))
     
     # multiplying binary1 with binary2 #
     elif choice == '5':
-        print(f"The result of the multiplication of {binary1} and {binary2} is:")
+        print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))
     
     # deviding binary1 by binary2 #
     elif choice == '6':
-        print(f"The result of the division of {binary1} and {binary2} is:")
+        
+        try:
+            int(binary2, 2) != 0
+        except:
+            error = True
+        
+        print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
 
     
     
@@ -114,4 +130,3 @@ while True:
     
     
     
-    break
