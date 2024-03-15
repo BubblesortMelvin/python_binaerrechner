@@ -138,7 +138,10 @@ input("Press a button to close the programm.")
     
     
     
-    
+# To-Do Liste:
+# try except: is binary number a binary number?
+# try except: is decimal number a decimal number?
+#def ask to continue as function
     
     
     
