@@ -25,15 +25,17 @@ def decimal_to_binary(decimal):
     if decimal == 0:                # if decimal number = 0, binary number also 0
         return "0"
 
+    #Setup local variables#
     abs_decimal = abs(decimal)
     num_bits = len(bin(abs_decimal)) - 2
-
     binary = ""
+
     for i in range(num_bits):
         rest = abs_decimal % 2 
         binary = str(rest) + binary
         abs_decimal //= 2
 
+    # cases for decimal >= 0, decimal < 0 #
     if decimal < 0:
         binary = '-0' + binary
     else:
@@ -42,8 +44,11 @@ def decimal_to_binary(decimal):
     return binary
 
 def binary_to_decimal(binary):
+    #setup local variables#
     decimal = 0                         # local variable decimal ist set
     power = len(binary) - 1             # the power (of two) is set to be the length of the binary code minus one 
+    
+
     for bit in binary:                  # every bit in the binary number is looked through and 
         if bit == '1':                  # if its '1' the two to the set power for the bit gets added to the decimal number
             decimal += 2 ** power
@@ -85,7 +90,7 @@ while True:
 
     elif choice == '2':
         binary = input("Please input a binary number: ")
-        print(f"The kdecimal number to {binary} is: ", binary_to_decimal(binary))
+        print(f"The decimal number to {binary} is: ", binary_to_decimal(binary))
 
     # user input for option 3 to 6 #
     else:
@@ -104,9 +109,8 @@ while True:
     elif choice == '5':
         print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))
     
-    # deviding binary1 by binary2 #
+    # deviding binary1 with binary2 #
     elif choice == '6':
-        
         try:
             print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
         except:
