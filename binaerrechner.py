@@ -67,6 +67,27 @@ def bin_multi(binary1, binary2):
 def bin_div(binary1, binary2):
     return bin(int(binary1, 2) // int(binary2, 2))[2:]
 
+def ask_to_continue():
+    while True:
+        ask_continue = input("Do you want to choose a new option? (yes/no): ")
+        try:
+            if ask_continue.lower() == 'no':
+                return False
+            elif ask_continue.lower() == 'yes':
+                return True
+            else:
+                print("Error: Invalid input. Please enter yes or no.")
+        except Exception as e:
+            print("An error occurred:", e)
+
+def is_it_binary(binnum):
+    try:
+        int(binnum, 2)
+        return True
+    except ValueError:
+        return False
+    
+
 while True:
     error = False
     # main menu setup #
@@ -78,58 +99,53 @@ while True:
     print("6. Binary division")
     print("7. Exit")
     # user input - main menu #
-    choice = input("Please choose an option (1-7): ")
+    choice = int(input("Please choose an option (1-7): "))
+
+    if choice < 1 or choice > 7:
+        print("Error: Invalid Input. Please choose a number from 1 to 7. ")
 
     # getting to chosen option with if, elif, else #
-    if choice == '7':
+    if choice == 7:
         break               # "breaking" the loop to finish programm
 
-    elif choice == '1':
+    elif choice == 1:
         decimal = int(input("Please input a decimal number: "))
         print(f"The binary number to {decimal} is: ", decimal_to_binary(decimal))
 
-    elif choice == '2':
+    elif choice == 2:
         binary = input("Please input a binary number: ")
-        print(f"The decimal number to {binary} is: ", binary_to_decimal(binary))
 
+    while True:
     # user input for option 3 to 6 #
-    else:
-        binary1 = input("Please input first binary number: ")      # choice 3-6 need two binary numbers
-        binary2 = input("Please input secon binary number: ")     # to not repeat asking for numbers they are asked after     
-                                                                    # choice 1, 2, 7
+        if choice in [3, 4, 5, 6]:
+            binary1 = input("Please input first binary number: ")      # choice 3-6 need two binary numbers
+            binary2 = input("Please input secon binary number: ")     # to not repeat asking for numbers they are asked after     
+            if not is_it_binary(binary1) or not is_it_binary(binary2):
+                print("Error: One or both numbers are not binary. Please only use 0 and 1")
+                break
     # addition of binary1 and binary2 #
-    if choice == '3':
-        print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))
+        if choice == 3:
+            print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))
     
     #subtraction of binary1 and binary2 #
-    elif choice == '4':
-        print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))
+        elif choice == 4:
+            print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))
     
     # multiplying binary1 with binary2 #
-    elif choice == '5':
-        print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))
+        elif choice == 5:
+            print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))
     
     # deviding binary1 with binary2 #
-    elif choice == '6':
-        try:
-            print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
-        except:
-            print("Ivalid User Input. You can not divide by zero!")
-            error = True
+        elif choice == 6:
+            try:
+                print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
+            except:
+                print("Ivalid User Input. You can not divide by zero!")
+                error = True
     
-    while True:
-        ask_continue = input("Do you want to choose a new option? (yes/no): ")
-        try:
-            if ask_continue.lower() == 'no':
-                break
-            elif ask_continue.lower() == 'yes':
-                break
-            else:
-                print("Error: Invalid input. Please enter yes or no.")
-        except Exception as e:
-            print("An error occurred:", e)
+        break 
     
-    if ask_continue.lower() == 'no':
+    if not ask_to_continue():
         break
 
 print("Thanks for using binaerrechner.py!!!")
@@ -141,7 +157,7 @@ input("Press a button to close the programm.")
 # To-Do Liste:
 # try except: is binary number a binary number?
 # try except: is decimal number a decimal number?
-#def ask to continue as function
+#def ask to continue as function --> works
     
     
     
