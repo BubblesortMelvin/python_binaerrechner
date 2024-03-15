@@ -85,6 +85,7 @@ def is_it_binary(binnum):
         int(binnum, 2)
         return True
     except ValueError:
+        print("Error: One or both numbers are not binary. Please only use 0 and 1")
         return False
     
 
@@ -113,37 +114,42 @@ while True:
         print(f"The binary number to {decimal} is: ", decimal_to_binary(decimal))
 
     elif choice == 2:
-        binary = input("Please input a binary number: ")
-
-    while True:
-    # user input for option 3 to 6 #
-        if choice in [3, 4, 5, 6]:
-            binary1 = input("Please input first binary number: ")      # choice 3-6 need two binary numbers
-            binary2 = input("Please input secon binary number: ")     # to not repeat asking for numbers they are asked after     
-            if not is_it_binary(binary1) or not is_it_binary(binary2):
-                print("Error: One or both numbers are not binary. Please only use 0 and 1")
+        while True:
+            binary = input("Please input a binary number: ")
+            if not is_it_binary(binary):
                 break
+            print(f"The decimal number to {binary} is: ", binary_to_decimal(binary))
+            break 
+
+    if choice in [3, 4, 5, 6]:
+        while True:
+    # user input for option 3 to 6 #
+        
+            binary1 = input("Please input first binary number: ")       # choice 3-6 need two binary numbers
+            binary2 = input("Please input secon binary number: ")       # to not repeat asking for numbers they are asked after     
+            if not is_it_binary(binary1) or not is_it_binary(binary2):  # is binary number a binary number
+                break                                                   #if not skip choice 3-6
     # addition of binary1 and binary2 #
-        if choice == 3:
-            print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))
+            if choice == 3:
+                print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))
     
     #subtraction of binary1 and binary2 #
-        elif choice == 4:
-            print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))
+            elif choice == 4:
+                print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))
     
-    # multiplying binary1 with binary2 #
-        elif choice == 5:
-            print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))
+    # multiplication of binary1 and binary2 #
+            elif choice == 5:
+                print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))
     
-    # deviding binary1 with binary2 #
-        elif choice == 6:
-            try:
-                print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
-            except:
-                print("Ivalid User Input. You can not divide by zero!")
-                error = True
+    # division of binary1 and binary2 #
+            elif choice == 6:
+                try:
+                    print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
+                except:
+                    print("Ivalid User Input. You can not divide by zero!")
+                
     
-        break 
+            break 
     
     if not ask_to_continue():
         break
