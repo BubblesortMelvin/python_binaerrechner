@@ -120,7 +120,7 @@ while True:
         break
 
 print("Thanks for using binaerrechner.py!!!")
-input(print("Press a button to close the programm."))
+input("Press a button to close the programm.")
     
     
     
