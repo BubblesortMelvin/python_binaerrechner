@@ -54,6 +54,7 @@ def bin_div(binary1, binary2):
     return bin(int(binary1, 2) // int(binary2, 2))[2:]
 
 while True:
+    error = False
     # main menu setup #
     print("1. Convert decimal number to binary number")
     print("2. Convert binary number to binary number")
@@ -64,12 +65,6 @@ while True:
     print("7. Exit")
     # user input - main menu #
     choice = input("Please choose an option (1-7): ")
-    
-    try:
-        choice >= 1 <= 7   # control if user chose the correct option
-    except:
-        error = True
-
 
     # getting to chosen option with if, elif, else #
     if choice == '7':
@@ -104,15 +99,28 @@ while True:
     elif choice == '6':
         
         try:
-            int(binary2, 2) != 0
+            print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
         except:
+            print("Ivalid User Input. You can not divide by zero!")
             error = True
-        
-        print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
+    
+    while True:
+        ask_continue = input("Do you want to choose a new option? (yes/no): ")
+        try:
+            if ask_continue.lower() == 'no':
+                break
+            elif ask_continue.lower() == 'yes':
+                break
+            else:
+                print("Error: Invalid input. Please enter yes or no.")
+        except Exception as e:
+            print("An error occurred:", e)
+    
+    if ask_continue.lower() == 'no':
+        break
 
-    
-    
-    
+print("Thanks for using binaerrechner.py!!!")
+input(print("Press a button to close the programm."))
     
     
     
