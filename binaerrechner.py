@@ -25,12 +25,21 @@ def decimal_to_binary(decimal):
     if decimal == 0:                # if decimal number = 0, binary number also 0
         return "0"
 
+    abs_decimal = abs(decimal)
+    num_bits = len(bin(abs_decimal)) - 2
+
     binary = ""
-    while decimal > 0:              
-        rest = decimal % 2              # decimal number / 2 = new decimal number + rest(1 or 0) 
-        binary = str(rest) + binary     # rest gets safed to binary from bit 0 - x
-        decimal = decimal // 2          # new decimal number gets set as decimal number
-    return binary                       # binary number from the rest from every 
+    for i in range(num_bits):
+        rest = abs_decimal % 2 
+        binary = str(rest) + binary
+        abs_decimal //= 2
+
+    if decimal < 0:
+        binary = '-0' + binary
+    else:
+        binary = '0' + binary
+
+    return binary
 
 def binary_to_decimal(binary):
     decimal = 0                         # local variable decimal ist set
