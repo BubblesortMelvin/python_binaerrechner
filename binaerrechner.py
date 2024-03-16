@@ -110,8 +110,16 @@ while True:
         break               # "breaking" the loop to finish programm
 
     elif choice == 1:
-        decimal = int(input("Please input a decimal number: "))
-        print(f"The binary number to {decimal} is: ", decimal_to_binary(decimal))
+        while True:
+            try:
+                decimal = int(input("Please input a decimal number: "))
+                print(f"The binary number to {decimal} is: ", decimal_to_binary(decimal))
+                break
+            except:
+                print("Invalid User Input: Please enter a decimal number.")
+                break
+
+            
 
     elif choice == 2:
         while True:
