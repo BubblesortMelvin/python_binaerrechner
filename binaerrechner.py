@@ -59,7 +59,11 @@ def bin_add(binary1, binary2):
     return bin(int(binary1, 2) + int(binary2, 2))[2:]
 
 def bin_sub(binary1, binary2):
-    return bin(int(binary1, 2) - int(binary2, 2))[2:]
+    result = int(binary1, 2) - int(binary2, 2)
+    if result < 0:
+        return '-0' + bin(abs(result))[2:]
+    else:
+        return bin(result)[2:]
 
 def bin_multi(binary1, binary2):
     return bin(int(binary1, 2) * int(binary2, 2))[2:]
