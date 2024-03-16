@@ -94,7 +94,6 @@ def is_it_binary(binnum):
     
 
 while True:
-    error = False
     # main menu setup #
     print("1. Convert decimal number to binary number")
     print("2. Convert binary number to binary number")
@@ -104,10 +103,22 @@ while True:
     print("6. Binary division")
     print("7. Exit")
     # user input - main menu #
-    choice = int(input("Please choose an option (1-7): "))
+    
+    while True:
+        choice = input("Please enter a number from 1 to 7: ")
+        try:
+            choice = int(choice)    
+            if not 1 <= choice <= 7:
+                print("The entered number is not within the valid range of 1 to 7.")
+                break
+            else:
+                print("Valid input!")
+                break
 
-    if choice < 1 or choice > 7:
-        print("Error: Invalid Input. Please choose a number from 1 to 7. ")
+        except:
+            print("Invalid input. Please enter an integer.")
+            break
+    
 
     # getting to chosen option with if, elif, else #
     if choice == 7:
@@ -122,9 +133,7 @@ while True:
             except:
                 print("Invalid User Input: Please enter a decimal number.")
                 break
-
-            
-
+        
     elif choice == 2:
         while True:
             binary = input("Please input a binary number: ")
