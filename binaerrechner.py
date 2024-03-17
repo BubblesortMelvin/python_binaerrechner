@@ -54,12 +54,19 @@ def binary_to_decimal(binary):
         if bit == '1':                                                          # if its '1' the two to the set power for the bit gets added to the decimal number
             decimal += 2 ** power
         power -= 1
-    return decimal                                                              # after power < 0 the decimal number is returned 
+
+    if binary[0] == '-':                                                        # if binary number is signed negative 
+        decimal = '-' + str(decimal)                                            # decimal number is returned negative
+    
+    return decimal                                                              # the decimal number is returned 
 
 # Calc-Function to add a binary number with another # 
 def bin_add(binary1, binary2):
-    return bin(int(binary1, 2) + int(binary2, 2))[2:]                           # two binary numbers are converted to integer 
-                                                                                # then added together and then converted to binary
+    result = int(binary1, 2) + int(binary2, 2)                                  # binary numbers are converted to integer and added together
+    if result < 0:                                                              # analysis of result 
+        return '-0' + bin(abs(result))[2:]                                      # returns result smaller then 0 adds a "-0" infront of binary number
+    else:
+        return bin(result)[2:]                                                  # returns every other result
 
 # Calc-Function to subtract a binary number with another #
 def bin_sub(binary1, binary2):
@@ -71,11 +78,19 @@ def bin_sub(binary1, binary2):
 
 # Calc-Function to multiply two binary numbers #
 def bin_multi(binary1, binary2):
-    return bin(int(binary1, 2) * int(binary2, 2))[2:]                           # returning result of "binary numbers are converted to integer, multiplied and converted to binary numbers again" 
-
+    result = int(binary1, 2) * int(binary2, 2)                                  #binary numbers are converted to integer and multiplied
+    if result < 0:                                                              #analysis of result 
+        return '-0' + bin(abs(result))[2:]                                      #returns result smaller then 0 adds a "-0" infront of binary number
+    else:
+        return bin(result)[2:]                                                  # returns every other result
+    
 # Calc-Function to divide two binary numbers #
 def bin_div(binary1, binary2):
-    return bin(int(binary1, 2) // int(binary2, 2))[2:]                          # returning result of "binary numbers are converted to integer, divided and converted to binary numbers again"
+    result = int(binary1, 2) // int(binary2, 2)                                 #binary numbers are converted to integer and divided
+    if result < 0:                                                              #analysis of result 
+        return '-0' + bin(abs(result))[2:]                                      #returns result smaller then 0 adds a "-0" infront of binary number
+    else:
+        return bin(result)[2:]                                                  # returns every other result                      
 
 # UI-Function to resume or quit programm #
 def ask_to_continue():
@@ -87,7 +102,7 @@ def ask_to_continue():
             elif ask_continue.lower() == 'yes':                                 # If User Input = any Version of "yes"        
                 return True                                                     # return True --> main while loop continues
             else:
-                print("Error: Invalid input. Please enter yes or no.")          # if user input != yes or no--> Error 
+                print("Invalid User Input. Please enter yes or no.")          # if user input != yes or no--> Error 
         except Exception as e:                                                  # in case DAU gives unimaginable input 
             print("An error occurred:", e)
 
@@ -97,13 +112,13 @@ def is_it_binary(binnum):
         int(binnum, 2)                                                          # tries to convert binary number to integer
         return True                                                             # if possible continues loop
     except ValueError:                                                          # if error returns false --> skips to aski_to_continue
-        print("Error: The used number not binary. Please only use 0 and 1")
+        print("Invalid User Input: The used number not binary. Please only use 0 and 1")
         return False
     
 # MAIN PROGRAMM #
 while True:
     # main menu setup #
-    print("""1. Convert decimal number to binary number
+    print("""1. Convert decimal number to binary number                         
 2. Convert binary number to binary number
 3. Binary addition
 4. Binary subtraction
@@ -114,18 +129,18 @@ while True:
     # user input - main menu #
     
     while True:
-        choice = input("Please enter a number from 1 to 7: ")
+        choice = input("Please enter a number from 1 to 7: ")                   # UI for main menu 
         try:
-            choice = int(choice)    
-            if not 1 <= choice <= 7:
-                print("The entered number is not within the valid range of 1 to 7.")
+            choice = int(choice)                                                # choice gets controlled if input = a number
+            if not 1 <= choice <= 7:                                            # choice gets controlled if input within menu options
+                print("Invalid User Input: The entered number is not within the valid range of 1 to 7.") # error if mot within range
                 break
             else:
-                print("Valid input!")
+                print("Valid input!")                                           # User friendly success feedback
                 break
 
         except:
-            print("Invalid input. Please enter an integer.")
+            print("Invalid User input: Please enter an integer.")                    # error if user decides to ignore putting a number into the UI
             break
     
 
@@ -136,22 +151,22 @@ while True:
     elif choice == 1:
         while True:
             try:
-                decimal = int(input("Please input a decimal number: "))
-                print(f"The binary number to {decimal} is: ", decimal_to_binary(decimal))
+                decimal = int(input("Please input a decimal number: "))        # UI for User to choose a decimal number
+                print(f"The binary number to {decimal} is: ", decimal_to_binary(decimal)) # shortend code to return binary number via function
                 break
             except:
-                print("Invalid User Input: Please enter a decimal number.")
+                print("Invalid User Input: Please enter a decimal number.")    # Error if no decimal input
                 break
         
     elif choice == 2:
         while True:
-            binary = input("Please input a binary number: ")
-            if not is_it_binary(binary):
+            binary = input("Please input a binary number: ")                    # UI for User to choose a binary number 
+            if not is_it_binary(binary):                                        # test if UI = binary number
                 break
-            print(f"The decimal number to {binary} is: ", binary_to_decimal(binary))
+            print(f"The decimal number to {binary} is: ", binary_to_decimal(binary)) # shortend code to return decimal number via function
             break 
 
-    if choice in [3, 4, 5, 6]:
+    if choice in [3, 4, 5, 6]:                                                  # choices 3-6 in array 
         while True:
     # user input for option 3 to 6 #
         
@@ -163,22 +178,23 @@ while True:
                 break                                                   #if not skip choice 3-6
     # addition of binary1 and binary2 #
             if choice == 3:
-                print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))
+                print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))          # shortend code to return addition result via function
     
     #subtraction of binary1 and binary2 #
             elif choice == 4:
-                print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))
+                print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))       # shortend code to return subtraction result via function
     
     # multiplication of binary1 and binary2 #
             elif choice == 5:
-                print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))
+                print(f"The result of the multiplication of {binary1} and {binary2} is:", bin_multi(binary1, binary2))  # shortend code to return multiplication result via function
     
     # division of binary1 and binary2 #
             elif choice == 6:
                 try:
-                    print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))
+                    print(f"The result of the division of {binary1} and {binary2} is:", bin_div(binary1, binary2))      # shortend code to return division result via function
                 except:
-                    print("Ivalid User Input. You can not divide by zero!")
+                    print("Ivalid User Input: You can not divide by zero!")                                             # Division Error sorted to here 
+                    break                                      
                 
     
             break 
