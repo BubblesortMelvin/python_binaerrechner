@@ -112,7 +112,7 @@ def is_it_binary(binnum):
         int(binnum, 2)                                                          # tries to convert binary number to integer
         return True                                                             # if possible continues loop
     except ValueError:                                                          # if error returns false --> skips to aski_to_continue
-        print("Invalid User Input: The used number not binary. Please only use 0 and 1")
+        print("Invalid User Input: The used number is not binary. Please only use 0 and 1")
         return False
     
 # MAIN PROGRAMM #
