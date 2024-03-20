@@ -10,7 +10,8 @@
 ##                                                         ##
 #############################################################
 #### Author: Melvin Suljanovic                           ####
-#### Date: 14.03.2024                                    ####
+#### Date: 20.03.2024                                    ####
+#### Matriculation number: 2026309                       ####
 #### Brief: A Calculator to convert binary numbers to    ####
 ####        decimal numbers and decimal numbers to       ####
 ####        binary numbers                               ####
@@ -95,7 +96,7 @@ def bin_div(binary1, binary2):
 # UI-Function to resume or quit programm #
 def ask_to_continue():
     while True:
-        ask_continue = input("Do you want to choose a new option? (yes/no): ")  # User Input
+        ask_continue = input("Do you want to restart the programm? (yes/no): ")  # User Input
         try:
             if ask_continue.lower() == 'no':                                    # If User Input = "no", "NO", "No", "nO" 
                 return False                                                    # return False --> main while loop gets broken through 
