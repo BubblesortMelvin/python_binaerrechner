@@ -181,7 +181,7 @@ while True:
             if choice == 3:
                 print(f"The result of the addition of {binary1} and {binary2} is:", bin_add(binary1, binary2))          # shortend code to return addition result via function
     
-    #subtraction of binary1 and binary2 #
+    # subtraction of binary1 and binary2 #
             elif choice == 4:
                 print(f"The result of the subtraction of {binary1} and {binary2} is:", bin_sub(binary1, binary2))       # shortend code to return subtraction result via function
     
